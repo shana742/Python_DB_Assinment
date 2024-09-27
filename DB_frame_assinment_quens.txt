@@ -1,0 +1,148 @@
+1)  Why Django should be used for web-development? Explain how you can create a project in Django?
+
+-> Django is popular web framework for developing web applicatio in python and it comes with serval advantage:
+        
+         A) Scalability
+         B) Versatile
+         C) Community and Documentation
+         D) Security
+         E) Rapid Development
+
+=> Create Django 
+
+ ->  create virtual enviorment:
+       - python -m venv myvenv
+ 
+ ->  activate the virtual enviorment:
+       - myvenv\Scripts\activate
+
+ ->  insttall django:
+       - pip install django
+ 
+ ->  create a requirments files(specific packges)
+       - pip freeze > requirements.txt
+
+ ->  start a new django project(admin):
+       - django-admin startproject mysite .
+
+ ->  Apply migrations:
+       - python mange.py migrate
+
+ ->  Run the server :
+       - python manage.py runserver
+
+ ->  create a speruser:
+       - python mange.py createsuperuser
+
+ ->  start new app (user):
+       - python manage.py startapp .myapp
+       
+ 
+2) How to check installed version of django ?
+
+-> python -m django -- version
+
+3) Explain what does django-admin.py make messages command is used for?
+
+-> the djangoo-admin.py makemaessage command is used  in django to generate message files for translation. it plays a 
+   crucial role in djangos i18n framwork , which allows your aplication to support multiple languge by manging translation.
+
+-> Purpose of 'makemessage'
+    
+    A) Extract Translatable String:
+      - it scans your django project source files(like .py ,.html,.txt) for strings marked as translnbe using django translation         function or template tags
+
+    B) Generate ' .po' files:
+      - it genertes or updates portable object('.po') files. these files are where you will add transltions for each language 
+        your application support.
+
+    C) Organize Translations :
+      -  it organizes these translations within the 'local' directory under subdiectories nmaed after language code.
+
+->  How to use ' makemessage'
+      - generate or update messsage files for a particular lsnguage, use makemessages
+      - django-admin.py makemessage -l fr (fr-create message file for french)
+
+
+4) What is Django URLs? make program to create django urls ?
+
+-> django urls are used to route HTTP requests to the approprite views. the URL configuration maps URLs to viiews
+   and is defined in python code. Each Django project has a main 'urls.py' file, and each app can also have its 
+   own 'urls.py' file to handle app-   specific routing.
+
+=> programm
+
+   ==> mysite/urls.py:
+        from django.contrib import admin
+        from django .urls import ath, include
+    
+        urlpatterns = [
+              path('admin/', admin.site.urls),
+              path('',include('myapp.urls')),
+        ]
+
+
+    ==> myapp/urls.py 
+          from django.urls import path
+          from import views
+    
+          urlpatterns = [
+              path('',views.home,name='home'),
+              path('about/',views.about,name='about'),
+          ]
+
+
+    ==>  Views ( handle requests and return response).
+
+           from django.shortcuts import render
+           def home(request):
+               return render(request, 'home.html')
+           def about(request):
+               return render(request, 'about.html')
+
+
+
+5) What is a QuerySet?Write program to create a new Post object in database:
+
+-> A QuerySet in django represents a collection of object from your database. it allows you to retireve , 
+   filter, order, and    manipukate the data in your databse in a pythonic way. QuerySets are typically 
+   obtained by querying models manger and they are    lazy, meaning that no database action occurs until 
+   the queryset is evaluted.
+
+-> Example 
+   
+   => creting new postobject in the database
+       - from django.db import models
+          class Post(models.Model):
+                title = models.CharField(max_length=255)
+                content = models.TextField()
+
+                def __str__(self):
+                    return self.title
+
+   =>views 
+     
+     from .models import postobject
+
+     def create_post(request):
+        post = Post.objects.create(title="my post",content=" This pst breief")
+        return (f"'{post.title}' created susefully ")
+             
+
+
+6) Mention what command line can be used to load data into Django?
+
+->  To load data into Django you have to use the command line django-admin.py loaddtata. The command line will serches 
+    the data loads the contents of the named fixture into the databse.
+
+
+
+
+
+7) Explain what does django-admin.py make messages command is used for?
+=> 
+    - django admin  use you models to automatically build a site area that you can use to create, 
+      view , update, and delete records.
+
+    - the makemessage command helps you generate translaton files for diffrent languages in your django project
+      allowing you to provide i18n support for various language.
